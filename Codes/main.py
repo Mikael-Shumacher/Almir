@@ -91,23 +91,22 @@ def microfone():
     return comando
 
 
-if __name__ == "_main_":
-    iniciar()
-    sair = 0
-    while sair == 0:
-        print("----Escutando----")
-        comando = microfone().lower()
-        if 'Almir' or 'almir' in comando:
-            if 'mostrar banco' in comando:
-                cursor.execute("SELECT * FROM vendas")
-                print(cursor.fetchall())
-            if 'hora' or 'horario' in comando:
-                horario()
-            elif 'data' in comando:
-                data()
-            elif 'abrir chrome' or 'abrir google' in comando:
-                os.system('"C:\Program Files\Google\Chrome\Application"')
-            else:
-                response = model.generate_content(comando)
-                print(response.text)
-                falar(response.text)
+iniciar()
+sair = 0
+while sair == 0:
+    print("----Escutando----")
+    comando = microfone().lower()
+    if 'Almir' or 'almir' in comando:
+        if 'mostrar banco' in comando:
+            cursor.execute("SELECT * FROM vendas")
+            print(cursor.fetchall())
+        if 'hora' or 'horario' in comando:
+            horario()
+        elif 'data' in comando:
+            data()
+        elif 'abrir chrome' or 'abrir google' in comando:
+            os.system('"C:\Program Files\Google\Chrome\Application"')
+        else:
+            response = model.generate_content(comando)
+            print(response.text)
+            falar(response.text)
