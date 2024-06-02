@@ -7,7 +7,7 @@ import random
 import os
 import google.generativeai as genai
 
-conn = sqlite3.connect('VAL.db')
+conn = sqlite3.connect('Data/VAL.db')
 cursor = conn.cursor()
 # cursor.execute(
 #    "CREATE  TABLE vendas (produto text, valor integer, quantidade integer, total integer)")
