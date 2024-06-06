@@ -6,7 +6,6 @@ import datetime
 import random
 import os
 import google.generativeai as genai
-
 conn = sqlite3.connect('../Data/VAL.db')
 cursor = conn.cursor()
 # cursor.execute(
@@ -17,7 +16,6 @@ for m in genai.list_models():
     if 'generateContent' in m.supported_generation_methods:
         print(m.name)
 model = genai.GenerativeModel('gemini-pro')
-audio = sr.Recognizer()
 maquina = pyttsx3.init()
 
 
@@ -29,7 +27,6 @@ iniciativas = ['como eu posso te ajudar?',
 horarios = ['O horario de hoje é:', 'Agora sao:']
 
 datas = ['A data de hoje é:', 'hoje é:']
-
 
 def falar(texto):
     voices = maquina.getProperty('rate')
