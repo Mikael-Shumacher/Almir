@@ -30,12 +30,14 @@ datas = ['A data de hoje é:', 'hoje é:']
 
 def falar(texto):
     voices = maquina.getProperty('rate')
+    maquina.setProperty("voice", "pt-br")
     maquina.setProperty('rate', 140)
     voices = maquina.getProperty('voices')
-    maquina.setProperty('voice', voices[0].id)
+    #for voice in voices:
+        #print(voice.id)
+    #maquina.setProperty("voice", "portuguese")
     maquina.say(texto)
     maquina.runAndWait()
-
 
 def iniciar():
     hr = datetime.datetime.now().strftime('%H')
@@ -53,14 +55,12 @@ def iniciar():
         'Voce agora se chama almir e é um assistente virtual')
     print(response.text)
 
-
 def data():
     dia = str(datetime.datetime.now().day)
     mes = str(datetime.datetime.now().month)
     ano = str(datetime.datetime.now().year)
     falar(random.choice(datas) + dia + "do" + mes)
     falar("de " + ano)
-
 
 def horario():
     hora = datetime.datetime.now().strftime("%H")
