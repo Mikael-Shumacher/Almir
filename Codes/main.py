@@ -7,7 +7,7 @@ import random
 import os
 import google.generativeai as genai
 
-conn = sqlite3.connect('Data/VAL.db')
+conn = sqlite3.connect('../Data/VAL.db')
 cursor = conn.cursor()
 # cursor.execute(
 #    "CREATE  TABLE vendas (produto text, valor integer, quantidade integer, total integer)")
@@ -93,20 +93,10 @@ def microfone():
 
 iniciar()
 sair = 0
-while sair == 0:
-    print("----Escutando----")
-    comando = microfone().lower()
-    if 'Almir' or 'almir' in comando:
-        if 'mostrar banco' in comando:
-            cursor.execute("SELECT * FROM vendas")
-            print(cursor.fetchall())
-        if 'hora' or 'horario' in comando:
-            horario()
-        elif 'data' in comando:
-            data()
-        elif 'abrir chrome' or 'abrir google' in comando:
-            os.system('"C:\Program Files\Google\Chrome\Application"')
-        else:
-            response = model.generate_content(comando)
-            print(response.text)
-            falar(response.text)
+#while sair == 0:
+print("----Escutando----")
+comando = microfone().lower()
+print(comando)
+            #response = model.generate_content(comando)
+            #print(response.text)
+            #falar(response.text)
