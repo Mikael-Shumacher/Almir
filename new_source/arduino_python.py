@@ -16,10 +16,11 @@ import serial as srl
 from time import sleep 
 
 
-#conn = sqlite3.connect('../Data/VAL.db')
+#conn = sqlite3.connect('../Data/{nome_}.db')
 #cursor = conn.cursor()
 # cursor.execute(
-#    "CREATE  TABLE vendas (produto text, valor integer, quantidade integer, total integer)")
+#    "CREATE  TABLE vendas (produto text, {nome_}or integer, quantidade integer, total integer)")
+nome_ = "VAL"
 api_google = 'AIzaSyDXF7x8AO_2eLKAc-wg-MUZmT_pAJMpm1E'
 genai.configure(api_key=api_google)
 for m in genai.list_models():
@@ -31,8 +32,9 @@ arduino = srl.Serial('COM4', 9600)
 arduino.flush()
 
 
-sou = ['sou o Almir', 'me chamo Almir.',
-       'meu nome é Almir', 'sou o assistente Almir']
+
+sou = [f'sou name', f'me chamo {nome_}.',
+       f'meu nome é {nome_}', f'sou um assistente chamado {nome_} ']
 
 iniciativas = ['como eu posso te ajudar?',
                'como eu posso te ajudar, hoje?', 'do que você precisa hoje?']
@@ -64,7 +66,7 @@ def iniciar():
         falar('Olá,' + random.choice(sou))
     falar(random.choice(iniciativas))
     response = model.generate_content(
-        'Voce agora se chama almir e é um assistente virtual')
+        f'Voce agora se chama {nome_} e é um assistente virtual')
     print(response.text)
 
 def data():
@@ -110,12 +112,11 @@ while sair == 0:
         data()
     elif 'led' in comando or 'luz' in comando:
         arduino.write('on'.encode()) 
-    elif 'desativar':
+
+    elif 'desativar' in comando:
           arduino.write('off'.encode()) 
     else:
-        print("oi")
-        #response = model.generate_content(comando)
-        #response_ = str(response.text).replace("*","")
-        #print(response_)
-        #falar(response_)
+        response = model.generate_content(comando)
+        response_ = str(response.text).replace("*","")
+        falar(response_)
    
