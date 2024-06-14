@@ -1,9 +1,3 @@
-    
-#while True:
-    #char= str(input("Number:"))
-    #arduino.write(char.encode()) 
-    #sleep(2)
-
 import sqlite3
 import speech_recognition as sr
 import pyttsx3
@@ -45,7 +39,7 @@ datas = ['A data de hoje é:', 'hoje é:']
 def falar(texto):
     voices = maquina.getProperty('rate')
     maquina.setProperty("voice", "brazil")
-    maquina.setProperty('rate', 130)
+    maquina.setProperty('rate', 170)
     voices = maquina.getProperty('voices')
     #for voice in voices:
         #print(voice.id)
@@ -110,11 +104,11 @@ while sair == 0:
     comando = microfone().lower()
     if 'data' in comando:
         data()
-    elif ('led' in comando or 'luz' in comando) and not 'desligar' in comando:
+    elif ('led' in comando or 'luz' in comando or 'ligue' in comando or 'ligar' in comando)  and (not 'desligar' in comando and not 'desligue' in comando):
         falar("O led será ligado.")
         arduino.write('on'.encode()) 
 
-    elif 'desativar' in comando or "desligar" in comando:
+    elif 'desativar' in comando or "desligar" in comando or 'desliga' in comando or 'desativa' in comando or 'desligue' in comando  :
           falar("O led será desligado.")
           arduino.write('off'.encode()) 
     else:
