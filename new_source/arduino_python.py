@@ -33,7 +33,7 @@ arduino.flush()
 
 
 
-sou = [f'sou name', f'me chamo {nome_}.',
+sou = [f'sou {nome_}', f'me chamo {nome_}.',
        f'meu nome é {nome_}', f'sou um assistente chamado {nome_} ']
 
 iniciativas = ['como eu posso te ajudar?',
@@ -110,10 +110,12 @@ while sair == 0:
     comando = microfone().lower()
     if 'data' in comando:
         data()
-    elif 'led' in comando or 'luz' in comando:
+    elif ('led' in comando or 'luz' in comando) and not 'desligar' in comando:
+        falar("O led será ligado.")
         arduino.write('on'.encode()) 
 
-    elif 'desativar' in comando:
+    elif 'desativar' in comando or "desligar" in comando:
+          falar("O led será desligado.")
           arduino.write('off'.encode()) 
     else:
         response = model.generate_content(comando)
