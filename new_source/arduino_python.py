@@ -17,9 +17,7 @@ from time import sleep
 nome_ = "VAL"
 api_google = 'AIzaSyDXF7x8AO_2eLKAc-wg-MUZmT_pAJMpm1E'
 genai.configure(api_key=api_google)
-for m in genai.list_models():
-    if 'generateContent' in m.supported_generation_methods:
-        print(m.name)
+
 model = genai.GenerativeModel('gemini-pro')
 maquina = pyttsx3.init()
 arduino = srl.Serial('COM4', 9600) 
@@ -37,13 +35,8 @@ horarios = ['O horario de hoje é:', 'Agora sao:']
 datas = ['A data de hoje é:', 'hoje é:']
 
 def falar(texto):
-    voices = maquina.getProperty('rate')
     maquina.setProperty("voice", "brazil")
     maquina.setProperty('rate', 170)
-    voices = maquina.getProperty('voices')
-    #for voice in voices:
-        #print(voice.id)
-    #maquina.setProperty("voice", "portuguese")
     maquina.say(texto)
     maquina.runAndWait()
 
@@ -60,7 +53,7 @@ def iniciar():
         falar('Olá,' + random.choice(sou))
     falar(random.choice(iniciativas))
     response = model.generate_content(
-        f'Voce agora se chama {nome_} e é um assistente virtual')
+        f'Voce agora se chama {nome_} e é um assistente virtual, fale brevemente quem  é você, inclusive seu nome.')
     print(response.text)
 
 def data():
@@ -115,4 +108,5 @@ while sair == 0:
         response = model.generate_content(comando)
         response_ = str(response.text).replace("*","")
         falar(response_)
+        print(response_)
    
