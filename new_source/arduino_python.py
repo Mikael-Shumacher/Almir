@@ -20,8 +20,8 @@ genai.configure(api_key=api_google)
 
 model = genai.GenerativeModel('gemini-pro')
 maquina = pyttsx3.init()
-arduino = srl.Serial('COM4', 9600) 
-arduino.flush()
+#arduino = srl.Serial('COM4', 9600) 
+#arduino.flush()
 
 
 
@@ -53,7 +53,7 @@ def iniciar():
         falar('Olá,' + random.choice(sou))
     falar(random.choice(iniciativas))
     response = model.generate_content(
-        f'Voce agora se chama {nome_} e é um assistente virtual, fale brevemente quem  é você, inclusive seu nome.')
+        f'Voce agora se chama {nome_} e é um assistente virtual, fale brevemente quem  é você, suas funções em 150 palavras, inclusive seu nome.')
     print(response.text)
 
 def data():
@@ -99,11 +99,11 @@ while sair == 0:
         data()
     elif ('led' in comando or 'luz' in comando or 'ligue' in comando or 'ligar' in comando)  and (not 'desligar' in comando and not 'desligue' in comando):
         falar("O led será ligado.")
-        arduino.write('on'.encode()) 
+        #arduino.write('on'.encode()) 
 
     elif 'desativar' in comando or "desligar" in comando or 'desliga' in comando or 'desativa' in comando or 'desligue' in comando  :
           falar("O led será desligado.")
-          arduino.write('off'.encode()) 
+          #arduino.write('off'.encode()) 
     else:
         response = model.generate_content(comando)
         response_ = str(response.text).replace("*","")
